@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <iostream>
+#include <cstring>
+#include <cstdlib>
 
 bool characteristic(char numString[], int& c);
 bool mantissa(char numString[], int& numerator, int& denominator);
@@ -21,19 +23,53 @@ int main()
     {
         //handle the error on input
         printf("test false \n");
-        return false;    
+        return false;
     }
-}    
-    
+}
+
 bool characteristic(char numString[], int& c)
 {
     //turn char into int
     int number = atoi(numString);
-    printf("%i", number);
+    printf("The number is %i\n", number);
     return true;
 }
 
 bool mantissa(char numString[], int& numerator, int& denominator)
 {
-    return false;
+  int mantissa_value;
+
+  char mantissa_value_string[100];
+
+  char mantissa_buffer[100];
+
+  int currentIndex = 0;
+
+  int offset = 0;
+
+  while( numString[currentIndex] != '.')
+  {
+    mantissa_buffer[currentIndex] = numString[currentIndex];
+
+    currentIndex++;
+
+    offset++;
+  }
+
+  currentIndex++;
+
+  while ( numString[currentIndex] != '\0')
+  {
+      mantissa_value_string[ currentIndex - offset ] = numString[ currentIndex ];
+
+      currentIndex++;
+  }
+
+
+  mantissa_value = atoi(mantissa_value_string);
+
+  printf("The mantissa is %i\n", mantissa_value);
+
+  return true;
+
 }
